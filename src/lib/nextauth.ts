@@ -6,7 +6,7 @@ import { prisma } from "./prisma";
 import bcrypt from "bcrypt";
 import { AuthOptions } from "next-auth";
 
-export const options: AuthOptions = {
+export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     DiscordProvider({
@@ -20,14 +20,14 @@ export const options: AuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "text" },
+        username: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null;
+        if (!credentials?.username || !credentials?.password) return null;
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+          where: { username: credentials.username },
         });
 
         if (!user || !user.password) return null;

@@ -14,14 +14,25 @@ datasource db {
 }
 
 model User {
-  id             String   @id @default(cuid())
+  id             String      @id @default(cuid())
   name           String?
-  email          String?  @unique
+  username       String?     @unique
+  email          String?     @unique
   emailVerified  DateTime?
   image          String?
   password       String?
   accounts       Account[]
   sessions       Session[]
+
+  onboarded      Boolean    @default(false)
+
+  // Finance
+  transactions   Transaction[]
+  categories     Category[]
+  preferences    UserPreferences?
+
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @default(now()) @updatedAt
 }
 
 model Account {
@@ -49,4 +60,50 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Transaction {
+  id            String            @id @default(cuid())
+  userId        String
+  categoryId    String?
+  type          TransactionType   // INCOME or EXPENSE
+  amount        Decimal
+  currency      String            // Ex: "USD", "BRL", "EUR"
+  description   String?
+  date          DateTime          @default(now())
+
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category      Category?         @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+}
+
+model Category {
+  id          String            @id @default(cuid())
+  userId      String
+  name        String
+  color       String?           // Ex: "#FF5733" (UI customization)
+  icon        String?           // Ex: "shopping-cart"
+  type        TransactionType   // INCOME or EXPENSE
+
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model UserPreferences {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  language     String   @default("")
+  currency     String   @default("")
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
 }
