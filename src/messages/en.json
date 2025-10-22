@@ -1,0 +1,9 @@
+{
+  "SignIn": {
+    "signedInAs": "Signed in as {email}",
+    "signOut": "Sign out",
+    "notSignedIn": "Not signed in",
+    "signIn": "Sign in",
+    "signInWith": "Sign in with {provider}"
+  }
+}

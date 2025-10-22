@@ -1,0 +1,9 @@
+{
+  "SignIn": {
+    "signedInAs": "Conectado como {email}",
+    "signOut": "Sair",
+    "notSignedIn": "Não está conectado",
+    "signIn": "Entrar",
+    "signInWith": "Entrar com {provider}"
+  }
+}
