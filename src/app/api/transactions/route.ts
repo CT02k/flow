@@ -49,3 +49,36 @@ export async function POST(req: Request) {
 
   return NextResponse.json({ transaction, stats });
 }
+
+export async function GET(req: Request) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.email)
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const { searchParams } = new URL(req.url);
+  const page = parseInt(searchParams.get("page") || "1");
+  const limit = parseInt(searchParams.get("limit") || "20");
+  const skip = (page - 1) * limit;
+
+  const user = await prisma.user.findUnique({
+    where: { email: session.user.email },
+    select: { id: true },
+  });
+
+  const [transactions, total] = await Promise.all([
+    prisma.transaction.findMany({
+      where: { userId: user!.id },
+      include: { category: true },
+      orderBy: { date: "desc" },
+      skip,
+      take: limit,
+    }),
+    prisma.transaction.count({ where: { userId: user!.id } }),
+  ]);
+
+  return NextResponse.json({
+    transactions,
+    page,
+    totalPages: Math.ceil(total / limit),
+  });
+}
