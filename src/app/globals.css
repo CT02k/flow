@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+* {
+  font-family: var(--font-bricolage);
+}
+
+body {
+  @apply bg-zinc-200;
+}

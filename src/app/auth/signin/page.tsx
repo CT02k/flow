@@ -47,9 +47,9 @@ export default function Component() {
   const { data: session } = useSession();
   const [loading, setLoading] = useState({ state: false, provider: "" });
 
-  //   if (session) {
-  //     return router.push("/dash");
-  //   }
+  if (session) {
+    return router.push("/dash");
+  }
 
   return (
     <div className="flex flex-row gap-5 w-full h-screen items-center justify-start bg-zinc-200">

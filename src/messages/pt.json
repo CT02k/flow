@@ -5,5 +5,22 @@
     "notSignedIn": "Não está conectado",
     "signIn": "Entrar",
     "signInWith": "Entrar com {provider}"
+  },
+  "Dashboard": {
+    "Header": {
+      "overview": "Visão Geral"
+    },
+    "greeting": "Boa tarde, {name}!",
+    "monthlyIncome": "Receita Mensal",
+    "monthlyExpense": "Despesa Mensal",
+    "totalBalance": "Saldo Geral",
+    "recentTransactions": "Transações Recentes",
+    "cards": "Meus Cartões",
+    "connections": "Conexões Ativas",
+    "availableLimit": "Limite Disponível",
+    "currentBill": "Fatura Atual",
+    "paid": "Pago",
+    "received": "Recebido",
+    "notPaid": "Não Pago"
   }
 }
