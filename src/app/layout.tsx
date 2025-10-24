@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${font.variable} antialiased selection:bg-white/25 selection:text-white`}
+        className={`${font.variable} antialiased selection:bg-green-200/30`}
       >
         <Providers>{children}</Providers>
       </body>

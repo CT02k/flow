@@ -12,8 +12,8 @@
     },
     "Overview": {
       "Greetings": {
-        "morning": "Good morning, <nameTag>{name}! 🌅</nameTag>",
-        "afternoon": "Good afternoon, <nameTag>{name}! 🌞</nameTag>",
+        "morning": "Good morning, <nameTag>{name}! ☁️</nameTag>",
+        "afternoon": "Good afternoon, <nameTag>{name}! ☀️</nameTag>",
         "evening": "Good evening, <nameTag>{name}! 🌙</nameTag>"
       },
       "monthlyIncome": "Monthly Income",

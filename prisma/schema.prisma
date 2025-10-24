@@ -28,14 +28,14 @@ model User {
 
   transactions Transaction[]
   categories   Category[]
-  preferences  UserPreferences?
+  preferences  Preferences?
+  stats        Stats?
 
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @default(now()) @updatedAt
-  UserFinanceStats UserFinanceStats?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
-model UserFinanceStats {
+model Stats {
   id             String   @id @default(cuid())
   userId         String   @unique
   totalBalance   Decimal  @default(0)
@@ -105,7 +105,7 @@ model Category {
   updatedAt DateTime @updatedAt
 }
 
-model UserPreferences {
+model Preferences {
   id       String @id @default(cuid())
   userId   String @unique
   language String @default("")

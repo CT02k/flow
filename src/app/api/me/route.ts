@@ -5,31 +5,27 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session?.user?.email)
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  if (!session?.user) {
+    return NextResponse.json({ error: true }, { status: 401 });
+  }
 
   const user = await prisma.user.findUnique({
-    where: { email: session.user.email },
-    include: {
-      preferences: true,
-      categories: true,
+    where: {
+      email: session.user.email || "undefined",
+    },
+    select: {
       transactions: { take: 5, orderBy: { date: "desc" } },
-      UserFinanceStats: true,
+      categories: true,
+      preferences: true,
+      stats: true,
+      onboarded: true,
     },
   });
 
-  if (!user)
-    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  if (!user) {
+    return NextResponse.json({ error: true }, { status: 404 });
+  }
 
-  return NextResponse.json({
-    onboarded: user.onboarded,
-    preferences: user.preferences ?? {},
-    categories: user.categories ?? [],
-    transactions: user.transactions ?? [],
-    summary: user.UserFinanceStats ?? {
-      totalBalance: 0,
-      monthlyIncome: 0,
-      monthlyExpense: 0,
-    },
-  });
+  return NextResponse.json(user, { status: 200 });
 }
