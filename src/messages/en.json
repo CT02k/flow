@@ -14,7 +14,8 @@
       "Greetings": {
         "morning": "Good morning, <nameTag>{name}! ☁️</nameTag>",
         "afternoon": "Good afternoon, <nameTag>{name}! ☀️</nameTag>",
-        "evening": "Good evening, <nameTag>{name}! 🌙</nameTag>"
+        "evening": "Good evening, <nameTag>{name}! 🌙</nameTag>",
+        "user": "User"
       },
       "monthlyIncome": "Monthly Income",
       "monthlyExpense": "Monthly Expense",

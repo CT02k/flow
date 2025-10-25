@@ -16,6 +16,12 @@ export default function BankAccountsCard({ showValues, setShowValues }: Props) {
       balance: 12000.5,
     },
     {
+      bank: "Safra Bank",
+      color: "#1E2044",
+      icon: "/banks/safra.svg",
+      balance: 8283.33,
+    },
+    {
       bank: "PayPal",
       color: "#002991",
       icon: "/banks/paypal.svg",
@@ -27,10 +33,16 @@ export default function BankAccountsCard({ showValues, setShowValues }: Props) {
       icon: "/banks/picpay.svg",
       balance: 0,
     },
+    {
+      bank: "PayPic",
+      color: "#21C25E",
+      icon: "/banks/picpay.svg",
+      balance: 2,
+    },
   ];
 
   return (
-    <div className="bg-zinc-50/50 rounded-lg p-6 border border-white w-80 md:w-148 relative">
+    <div className="bg-zinc-50/50 rounded-lg p-6 pb-0 border border-white w-80 md:w-148 h-84 relative flex flex-col">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">Accounts</h2>
         <button
@@ -41,9 +53,9 @@ export default function BankAccountsCard({ showValues, setShowValues }: Props) {
         </button>
       </div>
 
-      <ul className="space-y-3">
+      <ul className="space-y-3 overflow-y-scroll h-full pb-6">
         {bankAccounts.map((acc, i) => (
-          <li key={i} className="flex justify-between">
+          <li key={i} className="flex justify-between mr-5">
             <div className="flex gap-3">
               <div
                 className="w-12 h-12 rounded-lg flex items-center justify-center"

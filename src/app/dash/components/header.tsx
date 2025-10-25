@@ -8,24 +8,34 @@ import Link from "next/link";
 export default function Header() {
   const t = useTranslations("Dashboard.Header");
   return (
-    <header className="w-full bg-zinc-900 flex p-4 justify-between items-center">
+    <header className="w-full bg-zinc-50/50 border-b border-white flex p-4 justify-between items-center">
       <Image
         src="/branding/logo_full_white.svg"
         alt="Full Logo"
         width={100}
         height={100}
       />
-      <ul className="h-fit ">
+      <ul className="h-fit flex gap-6">
         <Link
-          className="text-zinc-200 group text-lg has-data-active:text-white has-data-active:font-semibold relative"
+          className={`text-zinc-700 link ${location.pathname === "/dash" && "active"} text-lg has-data-active:text-zinc-950 has-data-active:font-semibold relative transition hover:opacity-80`}
           href="/dash"
-          data-active={location.pathname === "/dash"}
         >
           {t("overview")}
-          <div
-            data-active
-            className="h-0.5 absolute w-0 group-hover:w-full group-has-data-active:w-full group-has-data-active:bg-white transition-all rounded-full bg-zinc-200"
-          ></div>
+          <div className="h-0.5 absolute w-0 line transition-all rounded-full bg-zinc-700"></div>
+        </Link>
+        <Link
+          className={`text-zinc-700 link ${location.pathname === "/dash/test" && "active"} text-lg has-data-active:text-zinc-950 has-data-active:font-semibold relative transition hover:opacity-80`}
+          href="/dash/test"
+        >
+          Dashboard.Header.test.n1
+          <div className="h-0.5 absolute w-0 line transition-all rounded-full bg-zinc-700"></div>
+        </Link>
+        <Link
+          className={`text-zinc-700 link ${location.pathname === "/dash/test2" && "active"} text-lg has-data-active:text-zinc-950 has-data-active:font-semibold relative transition hover:opacity-80`}
+          href="/dash/test2"
+        >
+          Dashboard.Header.test.n2
+          <div className="h-0.5 absolute w-0 line transition-all rounded-full bg-zinc-700"></div>
         </Link>
       </ul>
       <button>0</button>

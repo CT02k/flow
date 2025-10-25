@@ -11,6 +11,18 @@ body {
   @apply bg-zinc-200;
 }
 
+.link.active {
+  @apply font-semibold text-zinc-950;
+}
+
+.link.active .line {
+  @apply w-full bg-zinc-950 opacity-80;
+}
+
+.link:hover .line {
+  @apply w-full;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

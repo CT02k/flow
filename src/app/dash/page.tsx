@@ -53,12 +53,13 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-2xl text-zinc-700 mt-8">
-        {t.rich(greeting, {
-          nameTag: (chunks) => (
-            <p className="text-4xl text-black font-semibold">{chunks}</p>
-          ),
-          name: user?.name || "Usuário",
-        })}
+        {greeting &&
+          t.rich(greeting, {
+            nameTag: (chunks) => (
+              <p className="text-4xl text-black font-semibold">{chunks}</p>
+            ),
+            name: user?.name || t("Greetings.user"),
+          })}
       </h1>
 
       <div className="w-full flex flex-wrap justify-center gap-8 rounded-lg mt-8">

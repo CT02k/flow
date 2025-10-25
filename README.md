@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💸 Flow — Personal Finance Management App
 
-## Getting Started
+**Flow** is a personal finance management application built with **Next.js**, designed to help users track income, expenses, and account balances through a clean and modern interface.
 
-First, run the development server:
+The project is currently in an early stage — authentication via **NextAuth** is functional, and the base dashboard design is implemented.
+
+---
+
+## 🚀 Tech Stack
+
+- **Next.js 14+ (App Router)**
+- **TypeScript**
+- **NextAuth** — authentication
+- **Prisma** — database ORM
+- **TailwindCSS** — styling
+- **Shadcn**
+- **Lucide Icons**
+
+---
+
+## 🧠 Current Features
+
+- [x] NextAuth authentication (Google, GitHub, etc.)
+- [x] Dashboard UI with balance, income, and expense cards
+- [x] Basic transactions endpoint
+- [ ] Monthly analytics and charts
+- [ ] Full CRUD for transactions
+- [ ] Categories system
+- [ ] Light / Dark theme
+- [ ] Notifications ?
+
+---
+
+## ⚙️ Setup & Running Locally
 
 ```bash
+# 1. Clone the repository
+git clone https://github.com/ct02k/flow
+
+# 2. Enter the project folder
+cd flow
+
+# 3. Install dependencies
+npm i
+
+# 4. Create and configure the .env file
+cp .env.example .env
+# Add your NextAuth keys and database connection string
+
+# 5. Run migrations
+npx prisma migrate dev
+
+# 6. Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open 👉 [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧭 Roadmap / To-Do List
 
-## Learn More
+- [x] Initialize project
+- [x] Setup NextAuth and providers
+- [x] Build base dashboard layout
+- [x] Integrate transactions endpoint
+- [x] Add i18n
+- [ ] Add loading states and better animations
+- [ ] Create seed data for testing
+- [ ] Refine typings
+- [x] Add transaction create/edit forms
+- [x] Display transaction list in dashboard
+- [ ] Filter by type (income, expense)
+- [ ] Connect multiple account (manual and maybe automatic later) sources (bank, PayPal, etc.)
+- [ ] Add charts (because charts is cool)
+- [ ] Implement dark/light mode
+- [ ] Create profile page (account settings/preferences)
+- [ ] Improve mobile responsiveness
+- [ ] Add monitoring
+- [ ] Optimize (yes)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+maybe i forgot some things here

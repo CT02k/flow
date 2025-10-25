@@ -15,7 +15,7 @@ export default function RecentTransactionsCard() {
 
   return (
     <div className="bg-zinc-50/50 rounded-lg p-6 border border-white w-80 md:w-148">
-      <h2 className="text-lg font-semibold mb-4">Transações Recentes</h2>
+      <h2 className="text-lg font-semibold mb-4">Recent</h2>
       <ul className="space-y-3">
         {transactions.map((t) => (
           <li key={t.id} className="flex justify-between text-sm text-zinc-700">
