@@ -1,6 +1,6 @@
 # 💸 Flow — Personal Finance Management App
 
-[![Vercel Deploy](https://img.shields.io/github/deployments/ct02k/flow/Production?label=vercel&logo=vercel)](https://flow.vercel.app)
+[![Vercel Deploy](https://img.shields.io/github/deployments/ct02k/flow/Production?label=vercel&logo=vercel)](https://flow-omega-one.vercel.app)
 [![GitHub last commit](https://img.shields.io/github/last-commit/ct02k/flow)](https://github.com/ct02k/flow/commits/main)
 
 ## 📂 Overview
