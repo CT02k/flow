@@ -7,40 +7,45 @@ interface Props {
   setShowValues: (v: boolean) => void;
 }
 
-export default function BankAccountsCard({ showValues, setShowValues }: Props) {
-  const bankAccounts = [
-    {
-      bank: "Nubank",
-      color: "#820AD1",
-      icon: "/banks/nubank.svg",
-      balance: 12000.5,
-    },
-    {
-      bank: "Safra Bank",
-      color: "#1E2044",
-      icon: "/banks/safra.svg",
-      balance: 8283.33,
-    },
-    {
-      bank: "PayPal",
-      color: "#002991",
-      icon: "/banks/paypal.svg",
-      balance: 8530.23,
-    },
-    {
-      bank: "PicPay",
-      color: "#21C25E",
-      icon: "/banks/picpay.svg",
-      balance: 0,
-    },
-    {
-      bank: "PayPic",
-      color: "#21C25E",
-      icon: "/banks/picpay.svg",
-      balance: 2,
-    },
-  ];
+export const bankAccounts = [
+  {
+    id: 0,
+    bank: "Nubank",
+    color: "#820AD1",
+    icon: "/banks/nubank.svg",
+    balance: 12000.5,
+  },
+  {
+    id: 1,
+    bank: "Safra Bank",
+    color: "#1E2044",
+    icon: "/banks/safra.svg",
+    balance: 8283.33,
+  },
+  {
+    id: 2,
+    bank: "PayPal",
+    color: "#002991",
+    icon: "/banks/paypal.svg",
+    balance: 8530.23,
+  },
+  {
+    id: 3,
+    bank: "PicPay",
+    color: "#21C25E",
+    icon: "/banks/picpay.svg",
+    balance: 0,
+  },
+  {
+    id: 4,
+    bank: "PayPic",
+    color: "#21C25E",
+    icon: "/banks/picpay.svg",
+    balance: 2,
+  },
+];
 
+export default function BankAccountsCard({ showValues, setShowValues }: Props) {
   return (
     <div className="bg-zinc-50/50 rounded-lg p-6 pb-0 border border-white w-80 md:w-148 h-84 relative flex flex-col">
       <div className="flex justify-between items-center mb-4">
