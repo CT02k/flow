@@ -1,8 +1,7 @@
 "use client";
 
-import { Category, Transaction, UserPreferences } from "@prisma/client";
+import { Category, Transaction, Preferences } from "@prisma/client";
 import { useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import DashboardCard from "./components/DashboardCard";
 import BankAccountsCard from "./components/BankAccountsCard";
@@ -13,7 +12,7 @@ import RecentTransactionsCard from "./components/RecentTransactionsCard";
 interface UserData {
   transactions: Transaction[];
   categories: Category[];
-  preferences: UserPreferences;
+  preferences: Preferences;
   onboarded: boolean;
 }
 
@@ -24,7 +23,6 @@ export default function Dashboard() {
   const [incomeDrawerOpen, setIncomeDrawerOpen] = useState(false);
   const [expenseDrawerOpen, setExpenseDrawerOpen] = useState(false);
 
-  const t = useTranslations("Dashboard.Overview");
   const { data } = useSession();
   const user = data?.user;
 
@@ -36,9 +34,9 @@ export default function Dashboard() {
   useEffect(() => {
     const now = new Date();
     const hours = now.getHours();
-    if (hours >= 5 && hours < 12) setGreeting("Greetings.morning");
-    else if (hours >= 12 && hours < 18) setGreeting("Greetings.afternoon");
-    else setGreeting("Greetings.evening");
+    if (hours >= 5 && hours < 12) setGreeting("morning");
+    else if (hours >= 12 && hours < 18) setGreeting("afternoon");
+    else setGreeting("evening");
   }, []);
 
   useEffect(() => {
@@ -48,23 +46,30 @@ export default function Dashboard() {
       setUserData(data);
     }
     setData();
-  }, []);
+    console.log(userData);
+  });
 
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-2xl text-zinc-700 mt-8">
-        {greeting &&
-          t.rich(greeting, {
-            nameTag: (chunks) => (
-              <p className="text-4xl text-black font-semibold">{chunks}</p>
-            ),
-            name: user?.name || t("Greetings.user"),
-          })}
+        {greeting && (
+          <>
+            Good {greeting},
+            <p className="text-4xl text-black font-semibold">
+              {user?.name || "User"}{" "}
+              {greeting === "morning"
+                ? "☁️"
+                : greeting === "afternoon"
+                  ? "☀️"
+                  : "🌙"}
+            </p>
+          </>
+        )}
       </h1>
 
       <div className="w-full flex flex-wrap justify-center gap-8 rounded-lg mt-8">
         <DashboardCard
-          title={t("totalBalance")}
+          title="Total Balance"
           value={showValues ? totalBalance : undefined}
           showValues={showValues}
           // onAddIncome={() => setIncomeDrawerOpen(true)}
@@ -73,7 +78,7 @@ export default function Dashboard() {
         />
 
         <DashboardCard
-          title={t("monthlyIncome")}
+          title="Monthly Income"
           value={showValues ? monthlyIncome : undefined}
           showValues={showValues}
           onAddIncome={() => setIncomeDrawerOpen(true)}
@@ -81,7 +86,7 @@ export default function Dashboard() {
         />
 
         <DashboardCard
-          title={t("monthlyExpense")}
+          title="Monthly Expense"
           value={showValues ? monthlyExpense : undefined}
           showValues={showValues}
           onAddExpense={() => setExpenseDrawerOpen(true)}

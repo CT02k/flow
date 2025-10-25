@@ -1,12 +1,11 @@
 "use client";
 
 import { useSession, signIn } from "next-auth/react";
-import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
 import Image from "next/image";
 import { siDiscord, siGithub, SimpleIcon } from "simple-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 
 export interface Provider {
@@ -42,14 +41,15 @@ const providers: Provider[] = [
 ];
 
 export default function Component() {
-  const t = useTranslations("SignIn");
   const router = useRouter();
   const { data: session } = useSession();
   const [loading, setLoading] = useState({ state: false, provider: "" });
 
-  if (session) {
-    return router.push("/dash");
-  }
+  useEffect(() => {
+    if (session) router.push("/dash");
+  }, [session, router]);
+
+  if (session) return null;
 
   return (
     <div className="flex flex-row gap-5 w-full h-screen items-center justify-start bg-zinc-200">
@@ -84,9 +84,7 @@ export default function Component() {
                       dangerouslySetInnerHTML={{ __html: p.icon.svg }}
                     />
                   )}
-                  {t("signInWith", {
-                    provider: p.name,
-                  })}
+                  Sign with {p.name}
                 </>
               )}
             </button>

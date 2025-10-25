@@ -17,7 +17,7 @@ export const bankAccounts = [
   },
   {
     id: 1,
-    bank: "Safra Bank",
+    bank: "Safra",
     color: "#1E2044",
     icon: "/banks/safra.svg",
     balance: 8283.33,
