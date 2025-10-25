@@ -86,6 +86,11 @@ export default function BankAccountsCard({ showValues, setShowValues }: Props) {
           </li>
         ))}
       </ul>
+      <div className="flex justify-center py-3">
+        <button className="bg-white/70 rounded-lg border border-white w-full py-2 transition cursor-pointer hover:opacity-80">
+          Manage Accounts
+        </button>
+      </div>
     </div>
   );
 }
