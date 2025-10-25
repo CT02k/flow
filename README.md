@@ -1,33 +1,59 @@
 # 💸 Flow — Personal Finance Management App
 
-**Flow** is a personal finance management application built with **Next.js**, designed to help users track income, expenses, and account balances through a clean and modern interface.
+[![Vercel Deploy](https://img.shields.io/github/deployments/ct02k/flow/Production?label=vercel&logo=vercel)](https://flow.vercel.app)
+[![GitHub last commit](https://img.shields.io/github/last-commit/ct02k/flow)](https://github.com/ct02k/flow/commits/main)
 
-The project is currently in an early stage — authentication via **NextAuth** is functional, and the base dashboard design is implemented.
+## 📂 Overview
+
+**Flow** is a **personal finance management** app built with **Next.js**, designed to help users manage income, expenses, and account balances through a clean and modern UI.
+
+> 🧪 _Currently in early development: authentication and dashboard desin are already working._
+
+| Section                              | Description                   |
+| ------------------------------------ | ----------------------------- |
+| [🚀 Tech Stack](#-tech-stack)        | Core technologies used        |
+| [🧠 Features](#-current-features)    | What’s done and what’s coming |
+| [⚙️ Setup](#-setup--running-locally) | How to run locally            |
+| [🧭 Roadmap](#-roadmap--to-do-list)  | Next development goals        |
 
 ---
 
 ## 🚀 Tech Stack
 
-- **Next.js 14+ (App Router)**
+- **Next.js (App Router)**
 - **TypeScript**
 - **NextAuth** — authentication
 - **Prisma** — database ORM
-- **TailwindCSS** — styling
-- **Shadcn**
+- **TailwindCSS + Shadcn**
 - **Lucide Icons**
 
 ---
 
 ## 🧠 Current Features
 
-- [x] NextAuth authentication (Google, GitHub, etc.)
-- [x] Dashboard UI with balance, income, and expense cards
-- [x] Basic transactions endpoint
-- [ ] Monthly analytics and charts
-- [ ] Full CRUD for transactions
-- [ ] Categories system
-- [ ] Light / Dark theme
-- [ ] Notifications ?
+✅ **Implemented**
+
+- NextAuth authentication (Google, GitHub, etc.)
+- Dashboard UI (balance, income, expense cards)
+- Basic transactions endpoint
+- Transaction create/edit forms
+- Transaction list display in dashboard
+- i18n support
+
+🧩 **In Progress / Planned**
+
+- Full CRUD for transactions
+- Categories system
+- Filter by type (income, expense)
+- Connect multiple accounts (bank, PayPal, etc.)
+- Charts & visual analytics
+- Notifications (maybe)
+- Dark/light mode
+- Profile page (settings/preferences)
+- Improved mobile responsiveness
+- Monitoring & optimization
+- Seed data for testing
+- Refined TypeScript typings
 
 ---
 
@@ -43,7 +69,7 @@ cd flow
 # 3. Install dependencies
 npm i
 
-# 4. Create and configure the .env file
+# 4. Create and configure environment variables
 cp .env.example .env
 # Add your NextAuth keys and database connection string
 
@@ -60,25 +86,22 @@ Then open 👉 [http://localhost:3000](http://localhost:3000)
 
 ## 🧭 Roadmap / To-Do List
 
-- [x] Initialize project
-- [x] Setup NextAuth and providers
-- [x] Build base dashboard layout
-- [x] Integrate transactions endpoint
-- [x] Add i18n
-- [ ] Add loading states and better animations
-- [ ] Create seed data for testing
-- [ ] Refine typings
-- [x] Add transaction create/edit forms
-- [x] Display transaction list in dashboard
-- [ ] Filter by type (income, expense)
-- [ ] Connect multiple account (manual and maybe automatic later) sources (bank, PayPal, etc.)
-- [ ] Add charts (because charts is cool)
-- [ ] Implement dark/light mode
-- [ ] Create profile page (account settings/preferences)
-- [ ] Improve mobile responsiveness
-- [ ] Add monitoring
-- [ ] Optimize (yes)
-
----
-
-maybe i forgot some things here
+| Status | Task                                  |
+| :----: | :------------------------------------ |
+|   ✅   | Initialize project                    |
+|   ✅   | Setup NextAuth and providers          |
+|   ✅   | Build base dashboard layout           |
+|   ✅   | Integrate transactions endpoint       |
+|   ✅   | Add i18n                              |
+|   ✅   | Add transaction create/edit forms     |
+|   ✅   | Display transaction list in dashboard |
+|   🕐   | Full CRUD for transactions            |
+|   🕐   | Categories system                     |
+|   🕐   | Filter by type (income, expense)      |
+|   🕐   | Multi-account connections             |
+|   🕐   | Charts & analytics                    |
+|   🕐   | Dark/light mode                       |
+|   🕐   | Profile page                          |
+|   🕐   | Mobile responsiveness                 |
+|   🕐   | Monitoring & optimizations            |
+|   🕐   | Seed data + typings refinement        |
