@@ -3,11 +3,11 @@
 import { Category, Transaction, Preferences } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import DashboardCard from "./components/DashboardCard";
-import BankAccountsCard from "./components/BankAccountsCard";
-import ExpenseDrawer from "./components/ExpenseDrawer";
-import IncomeDrawer from "./components/IncomeDrawer";
-import RecentTransactionsCard from "./components/RecentTransactionsCard";
+import DashboardCard from "@/app/dash/components/DashboardCard";
+import BankAccountsCard from "@/app/dash/components/BankAccountsCard";
+import ExpenseDrawer from "@/app/dash/components/ExpenseDrawer";
+import IncomeDrawer from "@/app/dash/components/IncomeDrawer";
+import RecentTransactionsCard from "@/app/dash/components/RecentTransactionsCard";
 
 interface UserData {
   transactions: Transaction[];
