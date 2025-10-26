@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 
 interface Props {
   title: string;
-  value?: any;
+  value: string;
   showValues: boolean;
   onAddIncome?: () => void;
   onAddExpense?: () => void;

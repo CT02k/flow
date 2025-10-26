@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useSession } from "next-auth/react";
 import { BankAccount, Transaction } from "@prisma/client";
 import Image from "next/image";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -130,7 +129,9 @@ export default function TransactionsPage() {
           />
           <Select
             value={filterType}
-            onValueChange={(v: any) => setFilterType(v)}
+            onValueChange={(v) =>
+              setFilterType(v as "INCOME" | "EXPENSE" | "ALL")
+            }
           >
             <SelectTrigger className="w-32">
               <SelectValue placeholder="Type" />
@@ -142,7 +143,12 @@ export default function TransactionsPage() {
             </SelectContent>
           </Select>
 
-          <Select value={sortOrder} onValueChange={(v: any) => setSortOrder(v)}>
+          <Select
+            value={sortOrder}
+            onValueChange={(v) =>
+              setSortOrder(v as "NEWEST" | "OLDEST" | "HIGHEST" | "LOWEST")
+            }
+          >
             <SelectTrigger className="w-36">
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>

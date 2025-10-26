@@ -94,7 +94,7 @@ export default function Dashboard() {
       <div className="w-full flex flex-wrap justify-center gap-8 rounded-lg mt-8">
         <DashboardCard
           title="Total Balance"
-          value={showValues ? totalBalance.toFixed(2) : undefined}
+          value={showValues ? totalBalance.toFixed(2) : (0).toFixed(2)}
           showValues={showValues}
           onAddIncome={() => setIncomeDrawerOpen(true)}
           onAddExpense={() => setExpenseDrawerOpen(true)}
@@ -103,7 +103,7 @@ export default function Dashboard() {
 
         <DashboardCard
           title="Monthly Income"
-          value={showValues ? monthlyIncome.toFixed(2) : undefined}
+          value={showValues ? monthlyIncome.toFixed(2) : (0).toFixed(2)}
           showValues={showValues}
           onAddIncome={() => setIncomeDrawerOpen(true)}
           gradientColors={["bg-green-500/50", "bg-blue-500/50"]}
@@ -111,7 +111,7 @@ export default function Dashboard() {
 
         <DashboardCard
           title="Monthly Expense"
-          value={showValues ? monthlyExpense.toFixed(2) : 0}
+          value={showValues ? monthlyExpense.toFixed(2) : (0).toFixed(2)}
           showValues={showValues}
           onAddExpense={() => setExpenseDrawerOpen(true)}
           gradientColors={["bg-orange-500/50", "bg-red-500/50"]}
