@@ -8,6 +8,7 @@ import BankAccountsCard from "@/app/dash/components/BankAccountsCard";
 import ExpenseDrawer from "@/app/dash/components/ExpenseDrawer";
 import IncomeDrawer from "@/app/dash/components/IncomeDrawer";
 import RecentTransactionsCard from "@/app/dash/components/RecentTransactionsCard";
+import Onboarding from "./components/Onboarding";
 
 interface UserData {
   transactions: Transaction[];
@@ -50,60 +51,65 @@ export default function Dashboard() {
   });
 
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-2xl text-zinc-700 mt-8">
-        {greeting && (
-          <>
-            Good {greeting},
-            <p className="text-4xl text-black font-semibold">
-              {user?.name || "User"}{" "}
-              {greeting === "morning"
-                ? "☁️"
-                : greeting === "afternoon"
-                  ? "☀️"
-                  : "🌙"}
-            </p>
-          </>
-        )}
-      </h1>
+    <>
+      <div className="flex flex-col items-center">
+        <h1 className="text-2xl text-zinc-700 mt-8">
+          {greeting && (
+            <>
+              Good {greeting},
+              <p className="text-4xl text-black font-semibold">
+                {user?.name || "User"}{" "}
+                {greeting === "morning"
+                  ? "☁️"
+                  : greeting === "afternoon"
+                    ? "☀️"
+                    : "🌙"}
+              </p>
+            </>
+          )}
+        </h1>
 
-      <div className="w-full flex flex-wrap justify-center gap-8 rounded-lg mt-8">
-        <DashboardCard
-          title="Total Balance"
-          value={showValues ? totalBalance : undefined}
-          showValues={showValues}
-          // onAddIncome={() => setIncomeDrawerOpen(true)}
-          // onAddExpense={() => setExpenseDrawerOpen(true)}
-          gradientColors={["bg-zinc-500/50", "bg-zinc-900/50"]}
-        />
+        <div className="w-full flex flex-wrap justify-center gap-8 rounded-lg mt-8">
+          <DashboardCard
+            title="Total Balance"
+            value={showValues ? totalBalance : undefined}
+            showValues={showValues}
+            // onAddIncome={() => setIncomeDrawerOpen(true)}
+            // onAddExpense={() => setExpenseDrawerOpen(true)}
+            gradientColors={["bg-zinc-500/50", "bg-zinc-900/50"]}
+          />
 
-        <DashboardCard
-          title="Monthly Income"
-          value={showValues ? monthlyIncome : undefined}
-          showValues={showValues}
-          onAddIncome={() => setIncomeDrawerOpen(true)}
-          gradientColors={["bg-green-500/50", "bg-blue-500/50"]}
-        />
+          <DashboardCard
+            title="Monthly Income"
+            value={showValues ? monthlyIncome : undefined}
+            showValues={showValues}
+            onAddIncome={() => setIncomeDrawerOpen(true)}
+            gradientColors={["bg-green-500/50", "bg-blue-500/50"]}
+          />
 
-        <DashboardCard
-          title="Monthly Expense"
-          value={showValues ? monthlyExpense : undefined}
-          showValues={showValues}
-          onAddExpense={() => setExpenseDrawerOpen(true)}
-          gradientColors={["bg-orange-500/50", "bg-red-500/50"]}
+          <DashboardCard
+            title="Monthly Expense"
+            value={showValues ? monthlyExpense : undefined}
+            showValues={showValues}
+            onAddExpense={() => setExpenseDrawerOpen(true)}
+            gradientColors={["bg-orange-500/50", "bg-red-500/50"]}
+          />
+        </div>
+
+        <div className="flex justify-center gap-8 mt-16 w-full flex-wrap">
+          <RecentTransactionsCard />
+          <BankAccountsCard
+            showValues={showValues}
+            setShowValues={setShowValues}
+          />
+        </div>
+
+        <IncomeDrawer open={incomeDrawerOpen} setOpen={setIncomeDrawerOpen} />
+        <ExpenseDrawer
+          open={expenseDrawerOpen}
+          setOpen={setExpenseDrawerOpen}
         />
       </div>
-
-      <div className="flex justify-center gap-8 mt-16 w-full flex-wrap">
-        <RecentTransactionsCard />
-        <BankAccountsCard
-          showValues={showValues}
-          setShowValues={setShowValues}
-        />
-      </div>
-
-      <IncomeDrawer open={incomeDrawerOpen} setOpen={setIncomeDrawerOpen} />
-      <ExpenseDrawer open={expenseDrawerOpen} setOpen={setExpenseDrawerOpen} />
-    </div>
+    </>
   );
 }

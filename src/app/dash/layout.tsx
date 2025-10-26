@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import Header from "@/app/dash/components/Header";
+import Onboarding from "./components/Onboarding";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +14,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main>
+    <main className="relative">
       <Header />
       {children}
     </main>

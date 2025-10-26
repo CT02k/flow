@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import Providers from "@/app/providers";
+import Onboarding from "./dash/components/Onboarding";
 
 const font = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body
         className={`${font.variable} antialiased selection:bg-green-200/30`}
       >
+        <Onboarding />
         <Providers>{children}</Providers>
       </body>
     </html>
