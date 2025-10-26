@@ -41,17 +41,17 @@ export default function TransactionsPage() {
   const [editTx, setEditTx] = useState<Transaction | null>(null);
   const [accounts, setAccounts] = useState<BankAccount[]>([]);
 
-  const searchParams = useSearchParams();
-  const router = useRouter();
+  //   const searchParams = useSearchParams();
+  //   const router = useRouter();
 
-  const txQuery = searchParams.get("tx") || "";
+  //   const txQuery = searchParams.get("tx") || "";
 
-  useEffect(() => {
-    if (!txQuery || transactions.length === 0) return;
+  //   useEffect(() => {
+  //     if (!txQuery || transactions.length === 0) return;
 
-    const found = transactions.find((tx) => tx.id === txQuery);
-    if (found) setEditTx(found);
-  }, [txQuery, transactions]);
+  //     const found = transactions.find((tx) => tx.id === txQuery);
+  //     if (found) setEditTx(found);
+  //   }, [txQuery, transactions]);
 
   useEffect(() => {
     async function loadAccounts() {
@@ -181,7 +181,7 @@ export default function TransactionsPage() {
                   setEditTx(tx);
                   const params = new URLSearchParams(window.location.search);
                   params.set("tx", tx.id);
-                  router.replace(`?${params.toString()}`, { scroll: false });
+                  //   router.replace(`?${params.toString()}`, { scroll: false });
                 }}
               >
                 <Image
@@ -209,9 +209,9 @@ export default function TransactionsPage() {
                           window.location.search,
                         );
                         params.set("tx", tx.id);
-                        router.replace(`?${params.toString()}`, {
-                          scroll: false,
-                        });
+                        // router.replace(`?${params.toString()}`, {
+                        //   scroll: false,
+                        // });
                       }}
                     >
                       <Edit size={18} />
@@ -282,7 +282,7 @@ export default function TransactionsPage() {
           setEditTx(null);
           const params = new URLSearchParams(window.location.search);
           params.delete("tx");
-          router.replace(`?${params.toString()}`, { scroll: false });
+          //   router.replace(`?${params.toString()}`, { scroll: false });
         }}
         onSaved={fetchTransactions}
       />
