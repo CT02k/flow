@@ -28,6 +28,7 @@ model User {
 
   transactions Transaction[]
   categories   Category[]
+  bankAccounts BankAccount[]
   preferences  Preferences?
   stats        Stats?
 
@@ -73,18 +74,35 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Transaction {
-  id          String          @id @default(cuid())
-  userId      String
-  categoryId  String?
-  type        TransactionType
-  amount      Decimal
-  currency    String
-  description String?
-  date        DateTime        @default(now())
+model BankAccount {
+  id      String  @id @default(cuid())
+  userId  String
+  name    String // Nome da instituição (ex: "Nubank", "Itaú")
+  icon    String? // Ícone representativo (ex: "🏦" ou URL)
+  color   String? // Cor base (ex: "#820AD1")
+  balance Decimal @default(0) // Saldo atual (útil pra dashboards)
 
-  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  category Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Transaction {
+  id            String          @id @default(cuid())
+  userId        String
+  bankAccountId String? // Transação opcionalmente vinculada a uma conta bancária
+  categoryId    String?
+  type          TransactionType
+  amount        Decimal
+  description   String?
+  date          DateTime        @default(now())
+  tags           String[]        @default([])
+
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bankAccount BankAccount? @relation(fields: [bankAccountId], references: [id], onDelete: SetNull)
+  category    Category?    @relation(fields: [categoryId], references: [id], onDelete: SetNull)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
