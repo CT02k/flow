@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header className="w-full bg-zinc-50/50 border-b border-white flex p-4 justify-between items-center">
       <Image
-        src="/branding/logo_full_white.svg"
+        src="/branding/logo_full_default_black.svg"
         alt="Full Logo"
         width={100}
         height={100}
