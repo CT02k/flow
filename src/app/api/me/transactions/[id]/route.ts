@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/nextauth";
 
 export async function PUT(
   req: Request,
-  { params }: { params: { id: string } },
+  context: { params: Promise<{ id: string }> },
 ) {
   const session = await getServerSession(authOptions);
   if (!session?.user)
@@ -14,8 +14,10 @@ export async function PUT(
   const body = await req.json();
   const { description, amount, tags } = body;
 
+  const { id } = await context.params;
+
   const updated = await prisma.transaction.update({
-    where: { id: params.id },
+    where: { id },
     data: { description, amount: String(amount), tags },
   });
 
