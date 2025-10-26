@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 
 interface Props {
   title: string;
-  value?: number;
+  value?: any;
   showValues: boolean;
   onAddIncome?: () => void;
   onAddExpense?: () => void;
@@ -31,9 +31,7 @@ export default function DashboardCard({
       </div>
       <h1 className="text-lg font-medium">{title}</h1>
       <h2 className="text-4xl font-semibold">
-        {showValues && value !== undefined
-          ? `$ ${value.toLocaleString()}`
-          : "••••••"}
+        {showValues && value !== undefined ? `$ ${value}` : "••••••"}
       </h2>
 
       <div className="flex gap-3 mt-3">

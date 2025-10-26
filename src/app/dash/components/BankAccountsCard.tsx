@@ -1,51 +1,27 @@
 "use client";
 import { Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { BankAccount } from "@prisma/client";
+import BankAccountCreateDrawer from "./CreateBankAccountDrawer";
 
 interface Props {
   showValues: boolean;
   setShowValues: (v: boolean) => void;
 }
 
-export const bankAccounts = [
-  {
-    id: 0,
-    bank: "Nubank",
-    color: "#820AD1",
-    icon: "/banks/nubank.svg",
-    balance: 12000.5,
-  },
-  {
-    id: 1,
-    bank: "Safra",
-    color: "#1E2044",
-    icon: "/banks/safra.svg",
-    balance: 8283.33,
-  },
-  {
-    id: 2,
-    bank: "PayPal",
-    color: "#002991",
-    icon: "/banks/paypal.svg",
-    balance: 8530.23,
-  },
-  {
-    id: 3,
-    bank: "PicPay",
-    color: "#21C25E",
-    icon: "/banks/picpay.svg",
-    balance: 0,
-  },
-  {
-    id: 4,
-    bank: "PayPic",
-    color: "#21C25E",
-    icon: "/banks/picpay.svg",
-    balance: 2,
-  },
-];
-
 export default function BankAccountsCard({ showValues, setShowValues }: Props) {
+  const [accounts, setAccounts] = useState<BankAccount[]>([]);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  useEffect(() => {
+    async function loadAccounts() {
+      const res = await fetch("/api/me/bank-accounts");
+      const data = await res.json();
+      setAccounts(data);
+    }
+    loadAccounts();
+  }, []);
   return (
     <div className="bg-zinc-50/50 rounded-lg p-6 pb-0 border border-white w-80 md:w-148 h-84 relative flex flex-col">
       <div className="flex justify-between items-center mb-4">
@@ -59,38 +35,47 @@ export default function BankAccountsCard({ showValues, setShowValues }: Props) {
       </div>
 
       <ul className="space-y-3 overflow-y-scroll h-full pb-6">
-        {bankAccounts.map((acc, i) => (
+        {accounts.map((acc, i) => (
           <li key={i} className="flex justify-between mr-5">
             <div className="flex gap-3">
               <div
-                className="w-12 h-12 rounded-lg flex items-center justify-center"
+                className="w-14 h-14 rounded-lg flex items-center justify-center"
                 style={{ background: acc.color }}
               >
                 <Image
                   src={acc.icon}
-                  alt={`${acc.bank} Logo`}
-                  className="size-6 invert-100"
+                  alt={`${acc.name} Logo`}
+                  className="size-8 brightness-0 invert"
                   width={32}
                   height={32}
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-zinc-900 font-medium">{acc.bank}</span>
+                <span className="text-zinc-900 font-medium">{acc.name}</span>
 
                 <span className="text-zinc-700 text-sm">Bank Account</span>
               </div>
             </div>
             <span className="font-semibold">
-              {showValues ? `$ ${acc.balance.toFixed(2)}` : "••••••"}
+              {showValues ? `$ ${acc.balance}` : "••••••"}
             </span>
           </li>
         ))}
       </ul>
       <div className="flex justify-center py-3">
-        <button className="bg-white/70 rounded-lg border border-white w-full py-2 transition cursor-pointer hover:opacity-80">
-          Manage Accounts
+        <button
+          onClick={() => setDrawerOpen(true)}
+          className="bg-white/70 rounded-lg border border-white w-full py-2 transition cursor-pointer hover:opacity-80"
+        >
+          Create Account
         </button>
       </div>
+
+      <BankAccountCreateDrawer
+        open={drawerOpen}
+        setOpen={setDrawerOpen}
+        onCreated={() => {}}
+      />
     </div>
   );
 }

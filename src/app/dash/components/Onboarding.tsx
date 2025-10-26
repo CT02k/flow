@@ -17,7 +17,7 @@ function InitialSetupStep({ preferences, setPreferences }: any) {
           className="w-full border border-zinc-300 rounded-lg p-2"
         >
           <option value="en">English</option>
-          <option value="pt">Português</option>
+          {/* <option value="pt">Português</option> */}
         </select>
       </div>
 
@@ -33,8 +33,8 @@ function InitialSetupStep({ preferences, setPreferences }: any) {
           className="w-full border border-zinc-300 rounded-lg p-2"
         >
           <option value="usd">USD - Dollar</option>
-          <option value="brl">BRL - Real</option>
-          <option value="eur">EUR - Euro</option>
+          {/* <option value="brl">BRL - Real</option>
+          <option value="eur">EUR - Euro</option> */}
         </select>
       </div>
 
@@ -43,7 +43,7 @@ function InitialSetupStep({ preferences, setPreferences }: any) {
           Theme
         </label>
         <div className="flex gap-4">
-          {["light", "dark", "system"].map((theme) => (
+          {["dark", "system"].map((theme) => (
             <button
               key={theme}
               onClick={() => setPreferences({ ...preferences, theme })}

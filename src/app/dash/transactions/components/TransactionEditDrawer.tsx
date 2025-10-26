@@ -1,5 +1,7 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { Transaction } from "@prisma/client";
 import {
   Drawer,
   DrawerContent,
@@ -15,10 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState, useEffect } from "react";
 import { toast } from "sonner";
-
-type TransactionType = "INCOME" | "EXPENSE";
 
 export interface BankAccount {
   id: string;
@@ -28,17 +27,24 @@ export interface BankAccount {
 
 interface Props {
   open: boolean;
-  setOpen: (v: boolean) => void;
-  type: TransactionType;
+  onClose: () => void;
+  onSaved: () => void;
+  transaction: Transaction;
 }
 
-export default function TransactionDrawer({ open, setOpen, type }: Props) {
+export default function TransactionEditDrawer({
+  open,
+  onClose,
+  onSaved,
+  transaction,
+}: Props) {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [bankAccountId, setBankAccountId] = useState<string | undefined>();
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState("");
   const [accounts, setAccounts] = useState<BankAccount[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function loadAccounts() {
@@ -49,12 +55,22 @@ export default function TransactionDrawer({ open, setOpen, type }: Props) {
     loadAccounts();
   }, []);
 
+  useEffect(() => {
+    if (transaction) {
+      setDescription(transaction.description ?? "");
+      setAmount(String(transaction.amount));
+      setTags(transaction.tags || []);
+      setBankAccountId(transaction.bankAccountId ?? undefined);
+    }
+  }, [transaction]);
+
   const addTag = () => {
     if (!tagInput.trim()) return;
     if (tags.length >= 3) {
       toast.warning("You can only add up to 3 tags.");
       return;
     }
+    if (tags.includes(tagInput.trim())) return;
     setTags([...tags, tagInput.trim()]);
     setTagInput("");
   };
@@ -63,61 +79,41 @@ export default function TransactionDrawer({ open, setOpen, type }: Props) {
     setTags(tags.filter((t) => t !== tag));
   };
 
-  const isExpense = type === "EXPENSE";
-  const title = isExpense ? "Create Expense" : "Create Income";
-  const successMessage = isExpense
-    ? "Expense recorded successfully!"
-    : "Income created successfully!";
-
-  const resetState = () => {
-    setAmount("");
-    setDescription("");
-    setBankAccountId(undefined);
-    setTags([]);
-    setTagInput("");
-  };
-
-  const handleAddTransaction = async () => {
+  const handleSave = async () => {
+    setLoading(true);
     try {
-      const res = await fetch("/api/me/transactions", {
-        method: "POST",
+      const res = await fetch(`/api/me/transactions/${transaction.id}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: Number(amount),
           description,
+          amount: parseFloat(amount),
           bankAccountId,
-          type,
           tags,
         }),
       });
 
       if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(
-          errorData.message || `Failed to create ${type.toLowerCase()}`,
-        );
+        const error = await res.json();
+        throw new Error(error.message || "Failed to update transaction.");
       }
 
-      setOpen(false);
-      resetState();
-      toast.success(successMessage);
+      toast.success("Transaction updated successfully!");
+      onSaved();
+      onClose();
     } catch (err: any) {
       toast.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  useEffect(() => {
-    if (!open) {
-      resetState();
-    }
-  }, [open]);
-
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer open={open} onOpenChange={onClose}>
       <DrawerContent className="p-6">
         <DrawerHeader>
           <DrawerTitle className="text-3xl font-semibold text-black">
-            {title}
+            Edit Transaction
           </DrawerTitle>
         </DrawerHeader>
 
@@ -128,6 +124,7 @@ export default function TransactionDrawer({ open, setOpen, type }: Props) {
             onChange={(e) => setDescription(e.target.value)}
             className="bg-white/50 border border-white"
           />
+
           <div className="flex gap-4">
             <Input
               placeholder="Amount ($)"
@@ -189,9 +186,10 @@ export default function TransactionDrawer({ open, setOpen, type }: Props) {
 
           <Button
             className="mt-6 bg-white/80 border border-white text-black hover:opacity-70 hover:bg-white cursor-pointer"
-            onClick={handleAddTransaction}
+            onClick={handleSave}
+            disabled={loading}
           >
-            Create
+            {loading ? "Saving..." : "Save Changes"}
           </Button>
         </div>
       </DrawerContent>

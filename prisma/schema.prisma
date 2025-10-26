@@ -77,10 +77,10 @@ model Session {
 model BankAccount {
   id      String  @id @default(cuid())
   userId  String
-  name    String // Nome da instituição (ex: "Nubank", "Itaú")
-  icon    String? // Ícone representativo (ex: "🏦" ou URL)
-  color   String? // Cor base (ex: "#820AD1")
-  balance Decimal @default(0) // Saldo atual (útil pra dashboards)
+  name    String
+  icon    String
+  color   String
+  balance Decimal @default(0)
 
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   transactions Transaction[]
@@ -92,7 +92,7 @@ model BankAccount {
 model Transaction {
   id            String          @id @default(cuid())
   userId        String
-  bankAccountId String? // Transação opcionalmente vinculada a uma conta bancária
+  bankAccountId String?
   categoryId    String?
   type          TransactionType
   amount        Decimal

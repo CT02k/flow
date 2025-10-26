@@ -11,9 +11,8 @@ export async function GET() {
   }
 
   const user = await prisma.user.findUnique({
-    where: {
-      email: session.user.email,
-    },
+    where: { email: session.user.email },
+    select: { id: true },
   });
 
   if (!user) {
@@ -22,7 +21,7 @@ export async function GET() {
 
   const accounts = await prisma.bankAccount.findMany({
     where: { userId: user.id },
-    select: { id: true, name: true, color: true, balance: true },
+    select: { id: true, name: true, icon: true, color: true, balance: true },
     orderBy: { name: "asc" },
   });
 
@@ -36,32 +35,59 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: true }, { status: 401 });
   }
 
-  const { name, color, icon } = await req.json();
+  const body = await req.json();
+  const { name, color, icon } = body;
 
-  if (!name)
+  if (!name) {
     return NextResponse.json(
       { error: "Missing required fields" },
       { status: 400 },
     );
+  }
 
   const user = await prisma.user.findUnique({
-    where: {
-      email: session.user.email,
-    },
+    where: { email: session.user.email },
+    select: { id: true },
   });
 
   if (!user) {
     return NextResponse.json({ error: true }, { status: 401 });
   }
 
-  const account = await prisma.bankAccount.create({
-    data: {
-      userId: user.id,
-      name,
-      color,
-      icon,
-    },
+  const result = await prisma.$transaction(async (tx) => {
+    const account = await tx.bankAccount.create({
+      data: {
+        userId: user.id,
+        name: name.trim(),
+        color,
+        icon,
+        balance: 0,
+      },
+    });
+
+    const accounts = await tx.bankAccount.findMany({
+      where: { userId: user.id },
+      select: { balance: true },
+    });
+
+    const totalBalance = accounts.reduce(
+      (sum, acc) => sum + Number(acc.balance),
+      0,
+    );
+
+    await tx.stats.upsert({
+      where: { userId: user.id },
+      update: { totalBalance },
+      create: {
+        userId: user.id,
+        totalBalance,
+        monthlyIncome: 0,
+        monthlyExpense: 0,
+      },
+    });
+
+    return account;
   });
 
-  return NextResponse.json(account);
+  return NextResponse.json(result);
 }

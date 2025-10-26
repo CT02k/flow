@@ -10,7 +10,7 @@ export function useOnboarding() {
       setIsOnboarded(data.onboarded);
     }
     setData();
-  });
+  }, []);
 
   const handleOnboard = async () => {
     const req = await fetch("/api/me/onboarded", { method: "POST" });

@@ -38,22 +38,8 @@
 - Basic transactions endpoint
 - Transaction create/edit forms
 - Transaction list display in dashboard
-- i18n support
-
-🧩 **In Progress / Planned**
-
 - Full CRUD for transactions
-- Categories system
 - Filter by type (income, expense)
-- Connect multiple accounts (bank, PayPal, etc.)
-- Charts & visual analytics
-- Notifications (maybe)
-- Dark/light mode
-- Profile page (settings/preferences)
-- Improved mobile responsiveness
-- Monitoring & optimization
-- Seed data for testing
-- Refined TypeScript typings
 
 ---
 
@@ -95,13 +81,12 @@ Then open 👉 [http://localhost:3000](http://localhost:3000)
 |   ✅   | Add i18n                              |
 |   ✅   | Add transaction create/edit forms     |
 |   ✅   | Display transaction list in dashboard |
-|   🕐   | Full CRUD for transactions            |
+|   ✅   | Full CRUD for transactions            |
 |   🕐   | Categories system                     |
-|   🕐   | Filter by type (income, expense)      |
-|   🕐   | Multi-account                         |
+|   ✅   | Filter by type (income, expense)      |
+|   ✅   | Add multiple accou                    |
 |   🕐   | Charts & analytics                    |
 |   🕐   | Dark/light mode                       |
 |   🕐   | Profile page                          |
 |   🕐   | Mobile responsiveness                 |
 |   🕐   | Monitoring & optimizations            |
-|   ✅   | Seed data                             |

@@ -6,9 +6,6 @@ export default function Home() {
     <main className="w-full h-screen flex flex-col items-center justify-center relative overflow-hidden">
       <div className="bg-green-500/10 rounded-full size-250 absolute top-0 right-0 blur-[100px] animate-pulse"></div>
       <div className="bg-blue-500/10 rounded-full size-250 absolute bottom-0 left-0 blur-[100px] animate-pulse"></div>
-      <div className="absolute px-4 py-1.5 text-sm rounded-full backdrop-blur-lg bg-white/50 border border-white bottom-2.5 right-2.5">
-        🧪 Currently in early development.
-      </div>
       <div className="z-10 w-2/3 flex flex-col items-center mb-16">
         <Image
           src="/branding/logo_full_default_black.svg"

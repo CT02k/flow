@@ -15,6 +15,7 @@ export default function DashboardLayout({
 }>) {
   return (
     <main className="relative">
+      <Onboarding />
       <Header />
       {children}
     </main>
