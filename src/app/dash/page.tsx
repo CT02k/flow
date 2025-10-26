@@ -5,10 +5,9 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import DashboardCard from "@/app/dash/components/DashboardCard";
 import BankAccountsCard from "@/app/dash/components/BankAccountsCard";
-import ExpenseDrawer from "@/app/dash/components/ExpenseDrawer";
-import IncomeDrawer from "@/app/dash/components/IncomeDrawer";
+import TransactionDrawer from "@/app/dash/components/TransactionDrawer";
+
 import RecentTransactionsCard from "@/app/dash/components/RecentTransactionsCard";
-import Onboarding from "./components/Onboarding";
 
 interface UserData {
   transactions: Transaction[];
@@ -103,11 +102,15 @@ export default function Dashboard() {
             setShowValues={setShowValues}
           />
         </div>
-
-        <IncomeDrawer open={incomeDrawerOpen} setOpen={setIncomeDrawerOpen} />
-        <ExpenseDrawer
+        <TransactionDrawer
+          open={incomeDrawerOpen}
+          setOpen={setIncomeDrawerOpen}
+          type="INCOME"
+        />
+        <TransactionDrawer
           open={expenseDrawerOpen}
           setOpen={setExpenseDrawerOpen}
+          type="EXPENSE"
         />
       </div>
     </>

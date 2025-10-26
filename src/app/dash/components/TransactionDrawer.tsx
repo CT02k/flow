@@ -15,8 +15,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { toast } from "sonner";
+
+type TransactionType = "INCOME" | "EXPENSE";
 
 interface BankAccount {
   id: string;
@@ -27,9 +29,10 @@ interface BankAccount {
 interface Props {
   open: boolean;
   setOpen: (v: boolean) => void;
+  type: TransactionType;
 }
 
-export default function IncomeDrawer({ open, setOpen }: Props) {
+export default function TransactionDrawer({ open, setOpen, type }: Props) {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [bankAccountId, setBankAccountId] = useState<string | undefined>();
@@ -60,7 +63,21 @@ export default function IncomeDrawer({ open, setOpen }: Props) {
     setTags(tags.filter((t) => t !== tag));
   };
 
-  const handleAddIncome = async () => {
+  const isExpense = type === "EXPENSE";
+  const title = isExpense ? "Create Expense" : "Create Income";
+  const successMessage = isExpense
+    ? "Expense recorded successfully!"
+    : "Income created successfully!";
+
+  const resetState = () => {
+    setAmount("");
+    setDescription("");
+    setBankAccountId(undefined);
+    setTags([]);
+    setTagInput("");
+  };
+
+  const handleAddTransaction = async () => {
     try {
       const res = await fetch("/api/transactions", {
         method: "POST",
@@ -69,30 +86,38 @@ export default function IncomeDrawer({ open, setOpen }: Props) {
           amount: Number(amount),
           description,
           bankAccountId,
-          type: "INCOME",
+          type,
           tags,
         }),
       });
 
-      if (!res.ok) throw new Error("Failed to create transaction");
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(
+          errorData.message || `Failed to create ${type.toLowerCase()}`,
+        );
+      }
 
       setOpen(false);
-      setAmount("");
-      setDescription("");
-      setBankAccountId(undefined);
-      setTags([]);
-      toast.success("Income created successfully!");
+      resetState();
+      toast.success(successMessage);
     } catch (err: any) {
       toast.error(err.message);
     }
   };
 
+  useEffect(() => {
+    if (!open) {
+      resetState();
+    }
+  }, [open]);
+
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerContent className="p-6">
         <DrawerHeader>
-          <DrawerTitle className="text-3xl font-semibold">
-            Create Income
+          <DrawerTitle className="text-3xl font-semibold text-black">
+            {title}
           </DrawerTitle>
         </DrawerHeader>
 
@@ -161,7 +186,7 @@ export default function IncomeDrawer({ open, setOpen }: Props) {
 
           <Button
             className="mt-6 bg-white/80 border border-white text-black hover:opacity-70 hover:bg-white cursor-pointer"
-            onClick={handleAddIncome}
+            onClick={handleAddTransaction}
           >
             Create
           </Button>
