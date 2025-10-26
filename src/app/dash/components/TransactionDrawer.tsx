@@ -101,8 +101,8 @@ export default function TransactionDrawer({ open, setOpen, type }: Props) {
       setOpen(false);
       resetState();
       toast.success(successMessage);
-    } catch (err: any) {
-      toast.error(err.message);
+    } catch (err) {
+      console.error(err);
     }
   };
 

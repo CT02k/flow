@@ -101,8 +101,8 @@ export default function TransactionEditDrawer({
       toast.success("Transaction updated successfully!");
       onSaved();
       onClose();
-    } catch (err: any) {
-      toast.error(err.message);
+    } catch (err) {
+      console.error(err);
     } finally {
       setLoading(false);
     }

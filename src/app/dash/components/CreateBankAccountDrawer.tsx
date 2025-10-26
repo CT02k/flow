@@ -72,8 +72,8 @@ export default function BankAccountCreateDrawer({
       setOpen(false);
       resetState();
       onCreated?.();
-    } catch (err: any) {
-      toast.error(err.message);
+    } catch (err) {
+      console.error(err);
     } finally {
       setLoading(false);
     }

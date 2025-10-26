@@ -1,8 +1,26 @@
 "use client";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useOnboarding } from "../hooks/useOnboarding";
 
-function InitialSetupStep({ preferences, setPreferences }: any) {
+type Preferences = {
+  language: string;
+  currency: string;
+  theme: string;
+};
+
+function InitialSetupStep({
+  preferences,
+  setPreferences,
+}: {
+  preferences: Preferences;
+  setPreferences: Dispatch<
+    SetStateAction<{
+      language: string;
+      currency: string;
+      theme: string;
+    }>
+  >;
+}) {
   return (
     <div className="flex flex-col gap-6 w-full">
       <div>
@@ -43,7 +61,7 @@ function InitialSetupStep({ preferences, setPreferences }: any) {
           Theme
         </label>
         <div className="flex gap-4">
-          {["dark", "system"].map((theme) => (
+          {["light", "system"].map((theme) => (
             <button
               key={theme}
               onClick={() => setPreferences({ ...preferences, theme })}
