@@ -98,10 +98,10 @@ Then open 👉 [http://localhost:3000](http://localhost:3000)
 |   🕐   | Full CRUD for transactions            |
 |   🕐   | Categories system                     |
 |   🕐   | Filter by type (income, expense)      |
-|   🕐   | Multi-account connections             |
+|   🕐   | Multi-account                         |
 |   🕐   | Charts & analytics                    |
 |   🕐   | Dark/light mode                       |
 |   🕐   | Profile page                          |
 |   🕐   | Mobile responsiveness                 |
 |   🕐   | Monitoring & optimizations            |
-|   🕐   | Seed data + typings refinement        |
+|   ✅   | Seed data                             |
