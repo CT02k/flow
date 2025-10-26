@@ -55,14 +55,14 @@ export default function DashboardCard({
           <>
             <button
               onClick={onAddIncome}
-              className="px-4 py-2 bg-white/30 border border-white rounded-lg cursor-pointer transition hover:opacity-80"
+              className="px-4 py-1.5 bg-white/30 border border-white rounded-lg cursor-pointer transition hover:opacity-80"
             >
               Add income
             </button>
 
             <button
               onClick={onAddExpense}
-              className="px-4 py-2 bg-white/30 border border-white rounded-lg cursor-pointer transition hover:opacity-80"
+              className="px-4 py-1.5 bg-white/30 border border-white rounded-lg cursor-pointer transition hover:opacity-80"
             >
               Add expense
             </button>

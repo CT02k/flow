@@ -7,7 +7,7 @@
 
 **Flow** is a **personal finance management** app built with **Next.js**, designed to help users manage income, expenses, and account balances through a clean and modern UI.
 
-> 🧪 _Currently in early development: authentication and dashboard desin are already working._
+> 🧪 _Currently in early development_
 
 | Section                              | Description                   |
 | ------------------------------------ | ----------------------------- |

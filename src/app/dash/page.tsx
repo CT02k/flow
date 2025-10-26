@@ -96,6 +96,8 @@ export default function Dashboard() {
           title="Total Balance"
           value={showValues ? totalBalance.toFixed(2) : undefined}
           showValues={showValues}
+          onAddIncome={() => setIncomeDrawerOpen(true)}
+          onAddExpense={() => setExpenseDrawerOpen(true)}
           gradientColors={["bg-zinc-500/50", "bg-zinc-900/50"]}
         />
 
