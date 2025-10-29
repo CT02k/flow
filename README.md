@@ -5,14 +5,13 @@
 
 ## 📂 Overview
 
-**Flow** is a **personal finance management** app built with **Next.js**, designed to help users manage income, expenses, and account balances through a clean and modern UI.
+**Flow** is a **personal finance management** app built with **Next.js**, created to make tracking income, expenses, and balances simple and intuitive, It’s something I’ve always wanted to build, since I could never find a clean, modern, and affordable (or free) tool that actually solved this problem well.
 
 > 🧪 _Currently in early development_
 
 | Section                              | Description                   |
 | ------------------------------------ | ----------------------------- |
 | [🚀 Tech Stack](#-tech-stack)        | Core technologies used        |
-| [🧠 Features](#-current-features)    | What’s done and what’s coming |
 | [⚙️ Setup](#-setup--running-locally) | How to run locally            |
 | [🧭 Roadmap](#-roadmap--to-do-list)  | Next development goals        |
 
@@ -26,20 +25,6 @@
 - **Prisma** — database ORM
 - **TailwindCSS + Shadcn**
 - **Lucide Icons**
-
----
-
-## 🧠 Current Features
-
-✅ **Implemented**
-
-- NextAuth authentication (Google, GitHub, etc.)
-- Dashboard UI (balance, income, expense cards)
-- Basic transactions endpoint
-- Transaction create/edit forms
-- Transaction list display in dashboard
-- Full CRUD for transactions
-- Filter by type (income, expense)
 
 ---
 
@@ -78,7 +63,6 @@ Then open 👉 [http://localhost:3000](http://localhost:3000)
 |   ✅   | Setup NextAuth and providers          |
 |   ✅   | Build base dashboard layout           |
 |   ✅   | Integrate transactions endpoint       |
-|   ✅   | Add i18n                              |
 |   ✅   | Add transaction create/edit forms     |
 |   ✅   | Display transaction list in dashboard |
 |   ✅   | Full CRUD for transactions            |
