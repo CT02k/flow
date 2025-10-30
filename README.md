@@ -1,23 +1,27 @@
-# 💸 Flow — Personal Finance Management App
+<img src="https://github.com/user-attachments/assets/f32492f7-9bf7-405e-870c-5fe611613971" height="256" width="256"/>
 
 [![Vercel Deploy](https://img.shields.io/github/deployments/ct02k/flow/Production?label=vercel&logo=vercel)](https://flow-omega-one.vercel.app)
 [![GitHub last commit](https://img.shields.io/github/last-commit/ct02k/flow)](https://github.com/ct02k/flow/commits/main)
 
-## 📂 Overview
 
-**Flow** is a **personal finance management** app built with **Next.js**, created to make tracking income, expenses, and balances simple and intuitive, It’s something I’ve always wanted to build, since I could never find a clean, modern, and affordable (or free) tool that actually solved this problem well.
 
-> 🧪 _Currently in early development_
+https://github.com/user-attachments/assets/076a3920-ff2f-4040-a32a-164fe2884d4b
+
+
+
+## Overview
+Flow is a personal finance management tool.
+> _Currently in early development_
 
 | Section                              | Description                   |
 | ------------------------------------ | ----------------------------- |
-| [🚀 Tech Stack](#-tech-stack)        | Core technologies used        |
-| [⚙️ Setup](#-setup--running-locally) | How to run locally            |
-| [🧭 Roadmap](#-roadmap--to-do-list)  | Next development goals        |
+| [Tech Stack](#-tech-stack)        | Core technologies used        |
+| [Setup](#-setup--running-locally) | How to run locally            |
+| [Roadmap](#-roadmap--to-do-list)  | Next development goals        |
 
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - **Next.js (App Router)**
 - **TypeScript**
@@ -28,7 +32,7 @@
 
 ---
 
-## ⚙️ Setup & Running Locally
+## Setup & Running Locally
 
 ```bash
 # 1. Clone the repository
@@ -51,26 +55,24 @@ npx prisma migrate dev
 npm run dev
 ```
 
-Then open 👉 [http://localhost:3000](http://localhost:3000)
+Then open -> [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🧭 Roadmap / To-Do List
+## Roadmap / To-Do List
 
-| Status | Task                                  |
-| :----: | :------------------------------------ |
-|   ✅   | Initialize project                    |
-|   ✅   | Setup NextAuth and providers          |
-|   ✅   | Build base dashboard layout           |
-|   ✅   | Integrate transactions endpoint       |
-|   ✅   | Add transaction create/edit forms     |
-|   ✅   | Display transaction list in dashboard |
-|   ✅   | Full CRUD for transactions            |
-|   🕐   | Categories system                     |
-|   ✅   | Filter by type (income, expense)      |
-|   ✅   | Add multiple accou                    |
-|   🕐   | Charts & analytics                    |
-|   🕐   | Dark/light mode                       |
-|   🕐   | Profile page                          |
-|   🕐   | Mobile responsiveness                 |
-|   🕐   | Monitoring & optimizations            |
+- [x] Initialize project  
+- [x] Setup NextAuth and providers  
+- [x] Build base dashboard layout  
+- [x] Integrate transactions endpoint  
+- [x] Add transaction create/edit forms  
+- [x] Display transaction list in dashboard  
+- [x] Full CRUD for transactions  
+- [ ] Categories system 
+- [x] Filter by type (income, expense)  
+- [x] Add multiple accounts  
+- [ ] Charts & analytics 
+- [ ] Dark/light mode  
+- [ ] Profile page  
+- [ ] Mobile responsiveness 
+- [ ] Monitoring & optimizations 
